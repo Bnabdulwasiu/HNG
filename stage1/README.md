@@ -4,7 +4,7 @@ A FastAPI REST API that enriches a name with gender, age, and nationality predic
 
 ## Base URL
 ```
-https://profile-app-00443e51.fastapicloud.dev  
+https://profile-app-5343e495.fastapicloud.dev
 ```
 
 ---

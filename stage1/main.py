@@ -107,7 +107,7 @@ app = FastAPI(lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=False,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -157,9 +157,10 @@ def _profile_to_dict(profile: Profile) -> dict:
 
 
 # Post function
+@app.post("/api/profiles", status_code=201)
 @app.post("/api/profiles/", status_code=201)
 async def create_profile(body: CreateProfileRequest):
-    name = body.name.strip()
+    name =  body.name.strip().lower()
     if not name:
         raise HTTPException(status_code=400, detail={
             "status": "error",
@@ -221,7 +222,6 @@ async def create_profile(body: CreateProfileRequest):
         created_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
         profile = Profile(
-            id=str(uuid6.uuid7()),
             name=name.lower(),
             gender=gender_data.get("gender"),
             gender_probability=gender_data.get("probability"),
@@ -241,7 +241,7 @@ async def create_profile(body: CreateProfileRequest):
             "data": _profile_to_dict(profile)
         })
 
-
+@app.get("/api/profiles" , response_model=ProfileListResponse)
 @app.get("/api/profiles/", response_model=ProfileListResponse)
 async def get_all_profiles(
     gender: Optional[str] = None,
@@ -284,7 +284,6 @@ async def get_profile(profile_id: str):
         return {"status": "success", "data": _profile_to_dict(profile)}
 
     
-
 @app.delete("/api/profiles/{profile_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_profile(profile_id: str):
         async with AsyncSessionLocal() as session:
