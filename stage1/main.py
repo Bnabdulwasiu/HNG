@@ -221,7 +221,7 @@ async def create_profile(body: CreateProfileRequest):
         created_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
         profile = Profile(
-            id=str(uuid.uuid4()),
+            id=str(uuid6.uuid7()),
             name=name.lower(),
             gender=gender_data.get("gender"),
             gender_probability=gender_data.get("probability"),

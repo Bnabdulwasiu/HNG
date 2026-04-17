@@ -127,8 +127,8 @@ All errors follow this structure:
 
 ### Setup
 ```bash
-git clone https://github.com/bnabdulwasiu/HNG.git
-cd your-repo
+git clone https://github.com/Bnabdulwasiu/HNG.git
+cd HNG/stage1
 
 python -m venv venv
 venv\Scripts\activate      # Windows
@@ -141,7 +141,7 @@ fastapi dev main.py
 API runs at `http://localhost:8000`  
 Interactive docs at `http://localhost:8000/docs`
 
----
+<!-- ---
 
 ## Deployment
 
@@ -150,7 +150,7 @@ Deployed on [FastAPI Cloud](https://fastapicloud.com):
 fastapi deploy main.py
 ```
 
----
+--- -->
 
 ## Tech Stack
 
